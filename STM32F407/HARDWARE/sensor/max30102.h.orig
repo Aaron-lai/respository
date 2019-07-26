@@ -1,0 +1,72 @@
+#ifndef MAX30102_H_
+#define MAX30102_H_
+
+#include "sys.h"
+#include "stdbool.h"
+// max 30102 写入地址
+#define I2C_WRITE_ADDR 0xAE
+// max 30102 读取地址
+#define I2C_READ_ADDR 0xAF
+
+//传感器初始化地址
+#define REG_INTR_STATUS_1 0x00
+#define REG_INTR_STATUS_2 0x01
+#define REG_INTR_ENABLE_1 0x02
+#define REG_INTR_ENABLE_2 0x03
+//FIFO 寄存器参数
+#define REG_FIFO_WR_PTR 0x04
+#define REG_OVF_COUNTER 0x05
+#define REG_FIFO_RD_PTR 0x06
+#define REG_FIFO_DATA 0x07
+// 模式配置参数
+#define REG_FIFO_CONFIG 0x08
+#define REG_MODE_CONFIG 0x09
+#define REG_SPO2_CONFIG 0x0A
+#define REG_LED1_PA 0x0C
+#define REG_LED2_PA 0x0D
+#define REG_PILOT_PA 0x10
+#define REG_MULTI_LED_CTRL1 0x11
+#define REG_MULTI_LED_CTRL2 0x12
+// 
+#define REG_TEMP_INTR 0x1F
+#define REG_TEMP_FRAC 0x20
+#define REG_TEMP_CONFIG 0x21
+// 
+#define REG_PROX_INT_THRESH 0x30
+// 
+#define REG_REV_ID 0xFE
+#define REG_PART_ID 0xFF
+//配置参数
+
+
+/*
+第一组max30102 传感器函数
+*/
+bool max30102_init(void);
+bool max30102_read_fifo(uint32_t *pun_red_led, uint32_t *pun_ir_led);
+bool max30102_write_reg(uint8_t uch_addr, uint8_t uch_data);
+bool max30102_read_reg(uint8_t uch_addr, uint8_t *puch_data);
+bool max30102_reset(void);
+//参数设置
+void setLEDMode(uint8_t mode);
+void setFIFOAverage(uint8_t samples);
+void setADCRange(uint8_t adcRange);
+void setSampleRate(uint16_t sampleRate);
+void setPulseWidth(uint16_t pulseWidth);
+void bitMask(uint8_t reg, uint8_t mask, uint8_t thing);
+/*
+第二组max30102 传感器函数
+*/
+bool max30102_init_2(void);
+bool max30102_read_fifo_2(uint32_t *pun_red_led, uint32_t *pun_ir_led);
+bool max30102_write_reg_2(uint8_t uch_addr, uint8_t uch_data);
+bool max30102_read_reg_2(uint8_t uch_addr, uint8_t *puch_data);
+bool max30102_reset_2(void);
+//参数设置
+void setLEDMode_2(uint8_t mode);
+void setFIFOAverage_2(uint8_t samples);
+void setADCRange_2(uint8_t adcRange);
+void setSampleRate_2(uint16_t sampleRate);
+void setPulseWidth_2(uint16_t pulseWidth);
+void bitMask_2(uint8_t reg, uint8_t mask, uint8_t thing);
+#endif /*  MAX30102_H_ */
